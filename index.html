@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rudra's AutoLux - Premium Car Showcase</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+            text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                text-shadow: 0 0 10px rgba(255, 107, 53, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(255, 107, 53, 0.8), 0 0 30px rgba(255, 107, 53, 0.6);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6b35;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            margin-top: 60px;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.3), transparent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: float 6s ease-in-out infinite;
+            z-index: 0;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(-50%, -50%);
+            }
+            50% {
+                transform: translate(-50%, -60%);
+            }
+        }
+
+        .hero-content {
+            z-index: 1;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ff6b35, #f7b801);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ddd;
+            animation: slideInRight 0.8s ease-out 0.2s backwards;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, #ff6b35, #f7b801);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            animation: popIn 0.6s ease-out 0.4s backwards;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.5);
+        }
+
+        /* Cars Section */
+        .cars-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #ff6b35, #f7b801);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleSlide 0.8s ease-out;
+        }
+
+        @keyframes titleSlide {
+            from {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        .cars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .car-card {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            animation: cardFadeIn 0.6s ease-out;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes cardFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .car-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff6b35;
+            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.3);
+        }
+
+        .car-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #302b63, #24243e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .car-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .car-card:hover .car-image::before {
+            left: 100%;
+        }
+
+        /* Drift Animation */
+        .car-image.drift {
+            animation: carDrift 0.8s ease-in-out infinite;
+        }
+
+        @keyframes carDrift {
+            0% {
+                transform: translateX(0) rotateZ(0deg) scaleX(1);
+            }
+            25% {
+                transform: translateX(10px) rotateZ(-8deg) scaleX(1.05);
+            }
+            50% {
+                transform: translateX(0) rotateZ(0deg) scaleX(1);
+            }
+            75% {
+                transform: translateX(-10px) rotateZ(8deg) scaleX(1.05);
+            }
+            100% {
+                transform: translateX(0) rotateZ(0deg) scaleX(1);
+            }
+        }
+
+        .car-card:hover .car-image.drift {
+            animation: carDriftIntense 0.6s ease-in-out infinite;
+        }
+
+        @keyframes carDriftIntense {
+            0% {
+                transform: translateX(0) rotateZ(0deg) skewX(0deg);
+            }
+            25% {
+                transform: translateX(15px) rotateZ(-15deg) skewX(-3deg);
+            }
+            50% {
+                transform: translateX(0) rotateZ(0deg) skewX(0deg);
+            }
+            75% {
+                transform: translateX(-15px) rotateZ(15deg) skewX(3deg);
+            }
+            100% {
+                transform: translateX(0) rotateZ(0deg) skewX(0deg);
+            }
+        }
+
+        .car-info {
+            padding: 2rem;
+        }
+
+        .car-name {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+
+        .car-model {
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-bottom: 1rem;
+        }
+
+        .car-specs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .spec {
+            background: rgba(255, 107, 53, 0.1);
+            padding: 0.5rem;
+            border-radius: 5px;
+            border-left: 3px solid #ff6b35;
+            transition: all 0.3s;
+        }
+
+        .spec:hover {
+            background: rgba(255, 107, 53, 0.2);
+            transform: translateX(5px);
+        }
+
+        .car-price {
+            font-size: 1.5rem;
+            color: #f7b801;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 5rem 2rem;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s;
+            animation: featureFade 0.6s ease-out;
+        }
+
+        @keyframes featureFade {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+            background: rgba(255, 107, 53, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: iconRotate 2s ease-in-out infinite;
+        }
+
+        .feature-card:nth-child(1) .feature-icon { animation-delay: 0s; }
+        .feature-card:nth-child(2) .feature-icon { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) .feature-icon { animation-delay: 0.4s; }
+        .feature-card:nth-child(4) .feature-icon { animation-delay: 0.6s; }
+
+        @keyframes iconRotate {
+            0%, 100% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(10deg) scale(1.1);
+            }
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #ff6b35;
+        }
+
+        .feature-desc {
+            color: #ccc;
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 2rem;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .contact-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group {
+            grid-column: span 1;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 5px;
+            color: #fff;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #999;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            background: rgba(255, 107, 53, 0.1);
+            border-color: #ff6b35;
+            box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .contact-form textarea {
+            grid-column: 1 / -1;
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+            animation: slideUp 0.6s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 107, 53, 0.2);
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            color: #ff6b35;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            background: #ff6b35;
+            color: #000;
+            transform: scale(1.2) rotate(360deg);
+        }
+
+        /* Scroll Animation */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        .scroll-indicator::before {
+            content: '⬇';
+            font-size: 2rem;
+            color: #ff6b35;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">🏎️ Rudra's AutoLux</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#cars">Cars</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Premium Car Showcase</h1>
+            <p>Experience Luxury & Performance Like Never Before</p>
+            <button class="btn">Explore Now</button>
+        </div>
+        <div class="scroll-indicator"></div>
+    </section>
+
+    <!-- Cars Section -->
+    <section class="cars-section" id="cars">
+        <h2 class="section-title">Our Collection</h2>
+        <div class="cars-grid">
+            <!-- Car 1 -->
+            <div class="car-card">
+                <div class="car-image drift" style="background-image: url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=400&h=250&fit=crop');"></div>
+                <div class="car-info">
+                    <div class="car-name">Speed Demon</div>
+                    <div class="car-model">Performance Edition</div>
+                    <div class="car-specs">
+                        <div class="spec">0-100: 2.8s</div>
+                        <div class="spec">Top: 330 km/h</div>
+                        <div class="spec">Engine: 5.0L</div>
+                        <div class="spec">Power: 650 HP</div>
+                    </div>
+                    <div class="car-price">$250,000</div>
+                </div>
+            </div>
+
+            <!-- Car 2 -->
+            <div class="car-card">
+                <div class="car-image drift" style="background-image: url('https://images.unsplash.com/photo-1514162472292-8b6505b65318?w=400&h=250&fit=crop');"></div>
+                <div class="car-info">
+                    <div class="car-name">Luxury Elite</div>
+                    <div class="car-model">Premium Comfort</div>
+                    <div class="car-specs">
+                        <div class="spec">0-100: 3.5s</div>
+                        <div class="spec">Top: 280 km/h</div>
+                        <div class="spec">Engine: 4.2L</div>
+                        <div class="spec">Power: 500 HP</div>
+                    </div>
+                    <div class="car-price">$200,000</div>
+                </div>
+            </div>
+
+            <!-- Car 3 -->
+            <div class="car-card">
+                <div class="car-image drift" style="background-image: url('https://images.unsplash.com/photo-1560958089-b8a63c27271b?w=400&h=250&fit=crop');"></div>
+                <div class="car-info">
+                    <div class="car-name">Electric Thunder</div>
+                    <div class="car-model">Future Edition</div>
+                    <div class="car-specs">
+                        <div class="spec">0-100: 2.4s</div>
+                        <div class="spec">Range: 600 km</div>
+                        <div class="spec">Battery: 100kWh</div>
+                        <div class="spec">Power: 800 HP</div>
+                    </div>
+                    <div class="car-price">$180,000</div>
+                </div>
+            </div>
+
+            <!-- Car 4 -->
+            <div class="car-card">
+                <div class="car-image drift" style="background-image: url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=400&h=250&fit=crop');"></div>
+                <div class="car-info">
+                    <div class="car-name">Diamond Class</div>
+                    <div class="car-model">Exclusive Limited</div>
+                    <div class="car-specs">
+                        <div class="spec">0-100: 3.2s</div>
+                        <div class="spec">Top: 310 km/h</div>
+                        <div class="spec">Engine: 6.0L</div>
+                        <div class="spec">Power: 720 HP</div>
+                    </div>
+                    <div class="car-price">$300,000</div>
+                </div>
+            </div>
+
+            <!-- Car 5 -->
+            <div class="car-card">
+                <div class="car-image drift" style="background-image: url('https://images.unsplash.com/photo-1494976866685-cf32ccfed067?w=400&h=250&fit=crop');"></div>
+                <div class="car-info">
+                    <div class="car-name">Champion GT</div>
+                    <div class="car-model">Sport Edition</div>
+                    <div class="car-specs">
+                        <div class="spec">0-100: 3.1s</div>
+                        <div class="spec">Top: 300 km/h</div>
+                        <div class="spec">Engine: 5.5L</div>
+                        <div class="spec">Power: 680 HP</div>
+                    </div>
+                    <div class="car-price">$220,000</div>
+                </div>
+            </div>
+
+            <!-- Car 6 -->
+            <div class="car-card">
+                <div class="car-image drift" style="background-image: url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=400&h=250&fit=crop');"></div>
+                <div class="car-info">
+                    <div class="car-name">Starlight Pro</div>
+                    <div class="car-model">Advanced Tech</div>
+                    <div class="car-specs">
+                        <div class="spec">0-100: 3.0s</div>
+                        <div class="spec">Top: 320 km/h</div>
+                        <div class="spec">Engine: 5.2L</div>
+                        <div class="spec">Power: 700 HP</div>
+                    </div>
+                    <div class="car-price">$240,000</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <h2 class="section-title">Why Choose Us</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <div class="feature-title">Advanced Technology</div>
+                <div class="feature-desc">Latest automotive tech integrated with AI assistance</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🛡️</div>
+                <div class="feature-title">Maximum Safety</div>
+                <div class="feature-desc">6-airbag system with advanced safety features</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">♻️</div>
+                <div class="feature-title">Eco Friendly</div>
+                <div class="feature-desc">Low emissions and sustainable materials</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <div class="feature-title">Performance</div>
+                <div class="feature-desc">Unmatched acceleration and handling dynamics</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" placeholder="Your Name" required>
+            </div>
+            <div class="form-group">
+                <input type="email" placeholder="Your Email" required>
+            </div>
+            <div class="form-group">
+                <input type="tel" placeholder="Phone Number" required>
+            </div>
+            <div class="form-group">
+                <input type="text" placeholder="Car Interest" required>
+            </div>
+            <div class="form-group full">
+                <textarea placeholder="Your Message" required></textarea>
+            </div>
+            <div class="form-group full">
+                <button type="submit" class="btn">Send Message</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>Rudra's AutoLux - Premium Car Showcase</h3>
+            <div class="social-links">
+                <a href="#">📘 Facebook</a>
+                <a href="#">🐦 Twitter</a>
+                <a href="#">📸 Instagram</a>
+                <a href="#">💼 LinkedIn</a>
+            </div>
+            <p>&copy; 2025 Rudra's AutoLux. All rights reserved. Owned & Operated by Rudra</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Form submission
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you! We will contact you soon.');
+            this.reset();
+        });
+
+        // Scroll animation trigger
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.car-card, .feature-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
